@@ -3,6 +3,8 @@
 
 #include "Character/AuraEnemy.h"
 
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "AbilitySystem/AuraAttributeSet.h"
 #include "Aura/Aura.h"
 
 /**
@@ -14,6 +16,12 @@ AAuraEnemy::AAuraEnemy()
 	// 设置网格体对可见性通道的碰撞响应为忽略
 	// 这样射线检测（如鼠标悬停检测）不会被网格体阻挡
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Ignore);
+
+	AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent -> SetIsReplicated(true);
+	AbilitySystemComponent -> SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+	
+	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("Attribute");
 }
 
 /**
@@ -42,4 +50,11 @@ void AAuraEnemy::unHighlightActor()
 	GetMesh()->SetRenderCustomDepth(false);
 	// 关闭武器的自定义深度渲染
 	Weapon ->SetRenderCustomDepth(false);
+}
+
+void AAuraEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+	check(AbilitySystemComponent);
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 }
