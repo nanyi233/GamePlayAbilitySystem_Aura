@@ -5,7 +5,7 @@
 
 #include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Player/AuraPlayerState.h"
+
 
 AAuraCharacter::AAuraCharacter()
 {
@@ -36,9 +36,7 @@ void AAuraCharacter::OnRep_PlayerState()
 void AAuraCharacter::InitAbilityActorInfo()
 {
 	// 在服务器初始化角色的能力信息
-	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
-	check(AuraPlayerState);
-	AuraPlayerState -> GetAbilitySystemComponent() -> InitAbilityActorInfo(AuraPlayerState,this);
-	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
-	AttributeSet  = AuraPlayerState -> GetAttributeSet();
+
+	// check(AuraPlayerState);
+	
 }

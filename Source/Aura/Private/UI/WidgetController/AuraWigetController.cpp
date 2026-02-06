@@ -1,10 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Game/AuraGameModeBase.h"
+#include "UI/WidgetController/AuraWigetController.h"
 
-
-AAuraGameModeBase::AAuraGameModeBase()
-{
-
-}
